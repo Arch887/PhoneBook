@@ -79,20 +79,6 @@ public class PhoneBook {
                     searchContact();
                 }
             }
-
-        /*ArrayList<Contact> contactFound = new ArrayList<>();
-        for (int pozitie = 0; pozitie < myListOfContacts.size(); pozitie++) {
-
-
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            if (input.contains(myListOfContacts.get(pozitie).firstName)) {
-                showContact(myListOfContacts.get(pozitie));
-                contactFound.add(myListOfContacts.get(pozitie));
-            }
-
-        }*/
-
         }
 
 
