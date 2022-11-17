@@ -5,7 +5,9 @@ public class PhoneBook {
 
     ArrayList<Contact> myListOfContacts;
 
-     Scanner scanner =new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
+    String search;
+
     public PhoneBook() {
         myListOfContacts = new ArrayList<>();
     }
@@ -56,9 +58,28 @@ public class PhoneBook {
 
     void searchContact() {
 
-        String search;
         System.out.println("Write the name of the contact: ");
-        myListOfContacts.removeIf(search -> search.c )
+        search = scanner.next();
+
+        for (Contact searchName : myListOfContacts) {
+            if (searchName.firstName.startsWith(search)) {
+                System.out.println("Contact found !");
+                showContact(searchName);
+            } else {
+                System.out.println("Contact not found");
+                System.out.println("Return to menu ?");
+                System.out.println("Y for yes and N for no");
+                String asnwer = scanner.nextLine();
+
+
+                if (asnwer.startsWith("y")) {
+                    System.out.println("Return to menu");
+
+                } else if (asnwer.startsWith("n")) {
+                    searchContact();
+                }
+            }
+
         /*ArrayList<Contact> contactFound = new ArrayList<>();
         for (int pozitie = 0; pozitie < myListOfContacts.size(); pozitie++) {
 
@@ -72,29 +93,28 @@ public class PhoneBook {
 
         }*/
 
+        }
+
+
     }
+    void deleteContact () {
 
-    void deleteContact() {
+        System.out.println("Write the name of the contact: ");
+        String search = scanner.nextLine();
+        for (Contact searchName : myListOfContacts) {
+            if (searchName.firstName.contains(search)) {
+                System.out.println("Delete contact?");
+                System.out.println("Y for yes and N for no");
+                String answer = scanner.nextLine();
+                if (answer.startsWith("y")) {
+                    myListOfContacts.removeIf(searchLastName -> searchName.firstName.contains(search));
+                } else if (answer.startsWith("n")) {
 
-        char  yes = 'y';
-        char  no = 'n';
-        for (int pozitie = 0; pozitie < myListOfContacts.size(); pozitie++) {
-
-            Scanner scanner = new Scanner(System.in);
-
-            String input = scanner.nextLine();
-            if (input.contains(myListOfContacts.get(pozitie).firstName)) {
-                showContact(myListOfContacts.get(pozitie));
-                System.out.println("Delete this contact ? Y/N");
-                input = scanner.nextLine();
-                if (input.startsWith(String.valueOf(yes)) || input.startsWith(String.valueOf(no))) {
-                    myListOfContacts.remove(pozitie);
-                } else {
-                    System.out.println("Only Y/N input");
                 }
             }
-
         }
     }
-
 }
+
+
+
