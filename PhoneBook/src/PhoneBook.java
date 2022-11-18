@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class PhoneBook {
 
-    ArrayList<Contact> myListOfContacts;
 
-    Scanner scanner = new Scanner(System.in);
-    String search;
+    ArrayList<Contact> myListOfContacts;
+    private Scanner scanner = new Scanner(System.in);
+    public String search;
 
     public PhoneBook() {
         myListOfContacts = new ArrayList<>();
@@ -39,7 +39,7 @@ public class PhoneBook {
     }
 
     void readAndWrite() {
-        Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("Enter FirstName");
         String firstName = scanner.nextLine();
@@ -58,7 +58,7 @@ public class PhoneBook {
 
     void searchContact() {
 
-        System.out.println("Write the name of the contact: ");
+        System.out.println("Write the first name of the contact: ");
         search = scanner.next();
 
         for (Contact searchName : myListOfContacts) {
@@ -67,40 +67,74 @@ public class PhoneBook {
                 showContact(searchName);
             } else {
                 System.out.println("Contact not found");
-                System.out.println("Return to menu ?");
+            }
+        }
+    }
+
+    void deleteContact() {
+
+        System.out.println("Write the first name of the contact: ");
+
+         search = scanner.next();
+
+        for (Contact searchNameOfContact : myListOfContacts) {
+            if (searchNameOfContact.firstName.startsWith(search)) {
+                showContact(searchNameOfContact);
+                System.out.println("Delete contact?");
                 System.out.println("Y for yes and N for no");
-                String asnwer = scanner.nextLine();
 
+                char input = scanner.next().toLowerCase().charAt(0);
 
-                if (asnwer.startsWith("y")) {
-                    System.out.println("Return to menu");
+                switch (input) {
+                    case 'y':
+                        try {
+                            myListOfContacts.remove(myListOfContacts.get(Integer.parseInt(searchNameOfContact.toString())));
+                            System.out.println("Contact deleted !");
+                        } catch (Exception exception){
+                            System.out.println("Something happend");
+                        }
 
-                } else if (asnwer.startsWith("n")) {
-                    searchContact();
+                        break;
+                    case 'n':
+                        break;
                 }
             }
         }
-
-
     }
-    void deleteContact () {
+    void changeParameter(){
+        String input;
+        System.out.println("What contact do you wish to change ?");
 
-        System.out.println("Write the name of the contact: ");
-        String search = scanner.nextLine();
-        for (Contact searchName : myListOfContacts) {
-            if (searchName.firstName.contains(search)) {
-                System.out.println("Delete contact?");
-                System.out.println("Y for yes and N for no");
-                String answer = scanner.nextLine();
-                if (answer.startsWith("y")) {
-                    myListOfContacts.removeIf(searchLastName -> searchName.firstName.contains(search));
-                } else if (answer.startsWith("n")) {
+        for (Contact searchContactInList : myListOfContacts){
 
-                }
+            int i = 1;
+            System.out.println("Position: "+i);
+            searchContact(searchContactInList);
+
+            input = scanner.next();
+            if (searchContactInList.firstName.startsWith(input)){
+
+                input = scanner.nextLine();
+                int finalInput = Integer.parseInt(input);
+                myListOfContacts.set(finalInput, searchContactInList);
+                System.out.println("Change the first name: ");
+
             }
+
+        }
+
+        System.out.println("What do you wish to change ?");
+        input = scanner.next();
+        if (input.startsWith("fi")){
+
+        } else if (input.startsWith("sec")) {
+
+        } else if (input.startsWith("email")) {
+
+        } else if (input.startsWith("phone")) {
+
+        }else {
+            System.out.println("Wrong");
         }
     }
 }
-
-
-
